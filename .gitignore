@@ -1,69 +1,32 @@
-# Prerequisites
-*.d
+#include <stdio.h>
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+int main() {
+    int n, originalNumber, remainder, result = 0;
 
-# Precompiled Headers
-*.gch
-*.pch
+    printf("Enter a 3-digit integer (100 to 999): ");
+    scanf("%d", &n);
 
-# Linker files
-*.ilk
+    // Validate if the input is a 3-digit number
+    if (n < 100 || n > 999) {
+        printf("Error: Please enter a number between 100 and 999.\n");
+        return 1;
+    }
 
-# Debugger Files
-*.pdb
+    originalNumber = n;
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-*.so.*
+    // Extract digits and calculate the sum of their cubes
+    while (originalNumber != 0) {
+        remainder = originalNumber % 10;   // Gets the last digit
+        result += remainder * remainder * remainder; // Adds the cube of the digit
+        originalNumber /= 10;              // Removes the last digit
+    }
 
+    // Check if the sum equals the original number
+    if (result == n) {
+        printf("%d is a Narcissistic number.\n", n);
+    } else {
+        printf("%d is NOT a Narcissistic number.\n", n);
+    }
 
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# Build directories
-build/
-Build/
-build-*/
-
-# CMake generated files
-CMakeFiles/
-CMakeCache.txt
-cmake_install.cmake
-Makefile
-install_manifest.txt
-compile_commands.json
-
-# Temporary files
-*.tmp
-*.log
-*.bak
-*.swp
-
-# vcpkg
-vcpkg_installed/
-
-# debug information files
-*.dwo
-
-# test output & cache
-Testing/
-.cache/
+    return 0;
+}
